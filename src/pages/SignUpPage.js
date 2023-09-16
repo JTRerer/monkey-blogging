@@ -11,30 +11,11 @@ import { LoadingSpinner } from "../components/loading";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
-import { toInteger } from "lodash";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase/firebase-config";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
-const SignUpPageStyles = styled.div`
-  min-height: 100vh;
-  padding: 40px;
-  .logo {
-    margin: 0 auto 20px;
-    border-radius: 100%;
-  }
-  .heading {
-    text-align: center;
-    color: ${(props) => props.theme.primary};
-    font-weight: bold;
-    font-size: 40px;
-    margin-bottom: 60px;
-  }
-  .form {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-`;
+import AuthenticationPage from "./AuthenticationPage";
 const schema = yup
   .object({
     fullname: yup.string().required("Please enter your full name"),
@@ -99,6 +80,7 @@ const SignUpPage = () => {
   const [togglePassword, setTogglePassword] = useState(false);
 
   useEffect(() => {
+    document.title = "Sign Up Page";
     const arrErrors = Object.values(errors);
     if (arrErrors.length > 0) {
       toast.error(arrErrors[0]?.message, {
@@ -108,98 +90,93 @@ const SignUpPage = () => {
     }
   }, [errors]);
   return (
-    <SignUpPageStyles>
-      <div className="container">
-        <img
-          srcSet="/logo.png 2x"
-          alt="vin-secondhand-market"
-          className="logo"
-        />
-        <h1 className="heading">Vin Secondhand Market</h1>
-        <form
-          className="form"
-          onSubmit={handleSubmit(handleSignUp)}
-          autoComplete="off"
-        >
-          <Field>
-            <Label htmlFor="fullname" className="label">
-              Fullname
-            </Label>
-            <Input
-              name="fullname"
-              type="text"
-              placeholder="Enter your fullname"
-              control={control}
-            />
-          </Field>
-          <Field>
-            <Label htmlFor="email" className="label">
-              Email adress
-            </Label>
-            <Input
-              name="email"
-              type="email"
-              placeholder="Enter your email"
-              control={control}
-            />
-          </Field>
-          <Field>
-            <Label htmlFor="password" className="label">
-              Password
-            </Label>
-            <Input
-              name="password"
-              type={togglePassword ? "text" : "password"}
-              placeholder="Enter your password"
-              control={control}
-            >
-              {!togglePassword ? (
-                <IconEyeClose
-                  onClick={() => setTogglePassword(true)}
-                ></IconEyeClose>
-              ) : (
-                <IconEyeOpen
-                  onClick={() => setTogglePassword(false)}
-                ></IconEyeOpen>
-              )}
-            </Input>
-          </Field>
-          <Field>
-            <Label htmlFor="address" className="label">
-              Adress
-            </Label>
-            <Input
-              name="address"
-              type="text"
-              placeholder="Enter your address"
-              control={control}
-            />
-          </Field>
-          <Field>
-            <Label htmlFor="phone" className="label">
-              Phone Number
-            </Label>
-            <Input
-              name="phone"
-              type="text"
-              placeholder="Enter your phone number"
-              control={control}
-            />
-          </Field>
-          <Button
-            type="submit"
-            style={{
-              maxWidth: 300,
-              margin: "0 auto",
-            }}
-            disabled={isSubmitting}
-            isLoading={isSubmitting}
+    <AuthenticationPage>
+      <form
+        className="form"
+        onSubmit={handleSubmit(handleSignUp)}
+        autoComplete="off"
+      >
+        <Field>
+          <Label htmlFor="fullname" className="label">
+            Fullname
+          </Label>
+          <Input
+            name="fullname"
+            type="text"
+            placeholder="Enter your fullname"
+            control={control}
+          />
+        </Field>
+        <Field>
+          <Label htmlFor="email" className="label">
+            Email adress
+          </Label>
+          <Input
+            name="email"
+            type="email"
+            placeholder="Enter your email"
+            control={control}
+          />
+        </Field>
+        <Field>
+          <Label htmlFor="password" className="label">
+            Password
+          </Label>
+          <Input
+            name="password"
+            type={togglePassword ? "text" : "password"}
+            placeholder="Enter your password"
+            control={control}
           >
-            Sign Up
-          </Button>
-        </form>
-      </div>
-    </SignUpPageStyles>
+            {!togglePassword ? (
+              <IconEyeClose
+                onClick={() => setTogglePassword(true)}
+              ></IconEyeClose>
+            ) : (
+              <IconEyeOpen
+                onClick={() => setTogglePassword(false)}
+              ></IconEyeOpen>
+            )}
+          </Input>
+        </Field>
+        <Field>
+          <Label htmlFor="address" className="label">
+            Adress
+          </Label>
+          <Input
+            name="address"
+            type="text"
+            placeholder="Enter your address"
+            control={control}
+          />
+        </Field>
+        <Field>
+          <Label htmlFor="phone" className="label">
+            Phone Number
+          </Label>
+          <Input
+            name="phone"
+            type="text"
+            placeholder="Enter your phone number"
+            control={control}
+          />
+        </Field>
+        <div className="have-account">
+          You already have an account ? <NavLink to={"/sign-in"}>Login</NavLink>
+        </div>
+        <Button
+          type="submit"
+          style={{
+            maxWidth: 300,
+            margin: "0 auto",
+          }}
+          disabled={isSubmitting}
+          isLoading={isSubmitting}
+        >
+          Sign Up
+        </Button>
+      </form>
+    </AuthenticationPage>
   );
 };
 
