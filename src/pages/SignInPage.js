@@ -13,7 +13,7 @@ import Button from "../components/button/Button";
 import { IconEyeClose, IconEyeOpen } from "../components/icon";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase-config";
-
+import { signInWithGoogle } from "../firebase/firebase-config";
 const schema = yup.object({
   email: yup
     .string()
@@ -93,6 +93,7 @@ const SignInPage = () => {
           You don't have an account ?{" "}
           <NavLink to={"/sign-up"}>Register</NavLink>
         </div>
+        <button onClick={signInWithGoogle}>Sign In With Google</button>
         <Button
           type="submit"
           style={{
