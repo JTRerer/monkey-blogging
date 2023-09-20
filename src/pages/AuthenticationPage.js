@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 const AuthenticationPageStyles = styled.div`
   min-height: 100vh;
@@ -31,11 +32,13 @@ const AuthenticationPage = ({ children }) => {
   return (
     <AuthenticationPageStyles>
       <div className="container">
-        <img
-          srcSet="/logo.png 2x"
-          alt="vin-secondhand-market"
-          className="logo"
-        />
+        <NavLink to="/">
+          <img
+            srcSet="/logo.png 2x"
+            alt="vin-secondhand-market"
+            className="logo"
+          />
+        </NavLink>
         <h1 className="heading">Vin Secondhand Market</h1>
         {children}
       </div>
