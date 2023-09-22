@@ -36,10 +36,15 @@ const HomeBanner = () => {
           <div className="banner-content">
             <h1 className="banner-heading">Vin Second-hand Market</h1>
             <p className="banner-desc">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
-              voluptate veniam dolores officia eos placeat consequatur, ipsum
-              ratione neque nemo temporibus repellendus doloribus voluptatem cum
-              aspernatur nostrum earum iste quo.
+              Explore a vast and diverse collection of clothing, accessories,
+              furniture, and more, all conveniently accessible from the comfort
+              of your own home. Each item has its own story to tell, with a
+              history that adds character and depth to your purchase. Discover
+              the joy of sustainable shopping, as Vin Second-hand Market
+              supports the eco-conscious consumer by promoting the re-use and
+              upcycling of goods. By choosing second-hand treasures, you not
+              only save money but also contribute to a more environmentally
+              friendly way of living.
             </p>
             <Button to="/sign-up" kind="secondary">
               Get Started
