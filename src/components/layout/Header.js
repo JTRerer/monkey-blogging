@@ -58,8 +58,8 @@ const MenuLinks = [
     title: "Home",
   },
   {
-    url: "/blog",
-    title: "Blog",
+    url: "/post",
+    title: "Post",
   },
   {
     url: "/contact",
